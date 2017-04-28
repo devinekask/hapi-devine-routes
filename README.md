@@ -23,7 +23,7 @@ server.register({
   register: require(`hapi-devine-routes`),
 
   options: {
-    routesDir: path.join(__dirname, `routes`) // schema directory (required)
+    routesDir: path.join(__dirname, `routes`) // routes directory (required)
     log: true // provide logs (optional, default: true)
   }
 
