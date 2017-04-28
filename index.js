@@ -5,10 +5,10 @@ const chalk = require(`chalk`);
 
 module.exports.register = (server, options, next) => {
 
-  const {routesDir, log = true} = options;
+  const {path: p, log = true} = options;
 
-  if (!routesDir) {
-    throw new Error(`"routesDir" required`);
+  if (!p) {
+    throw new Error(`"path" required`);
   }
 
   const logRoute = ({path, method}) => {
@@ -19,32 +19,37 @@ module.exports.register = (server, options, next) => {
 
   glob(
 
-    path.join(routesDir, `**/*.js`),
+    path.join(p, `**/*.js`),
     {ignore: [`**/*/index.js`, `**/*/_*.js`]},
 
-    (err, files) => files.forEach(f => {
+    (err, files) => {
 
-      const routes = require(f);
+      files.forEach(f => {
 
-      server.route(routes);
-
-      if (log) {
-
-        const base = path.basename(routesDir);
-        const file = path.relative(routesDir, f);
-
-        console.log(``);
-        console.log(`${chalk.yellow(`hapi-devine-routes`)}: registered routes in ${chalk.cyan(`${base}/${file}`)}:`);
         if (log) console.log(``);
-        routes.forEach(r => logRoute(r));
 
-      }
+        const routes = require(f);
 
-    })
+        server.route(routes);
+
+        if (log) {
+
+          const base = path.basename(p);
+          const file = path.relative(p, f);
+
+          console.log(`${chalk.yellow(`hapi-devine-routes`)}: registered routes in ${chalk.cyan(`${base}/${file}`)}:`);
+          if (log) console.log(``);
+          routes.forEach(r => logRoute(r));
+
+        }
+
+      });
+
+      if (log) console.log(``);
+
+    }
 
   );
-
-  if (log) console.log(``);
 
   next();
 
