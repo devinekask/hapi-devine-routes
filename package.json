@@ -1,6 +1,6 @@
 {
   "name": "hapi-devine-routes",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "🔧 This Hapi plugin loads all routes in the given directory and registers them on your Hapi server",
   "main": "index.js",
   "repository": "devinehowest/hapi-devine-routes",

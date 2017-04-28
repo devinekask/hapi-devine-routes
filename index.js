@@ -5,13 +5,13 @@ const chalk = require(`chalk`);
 
 module.exports.register = (server, options, next) => {
 
-  const {routesDir} = options;
+  const {routesDir, log = true} = options;
 
   if (!routesDir) {
     throw new Error(`"routesDir" required`);
   }
 
-  const log = ({path, method}) => {
+  const logRoute = ({path, method}) => {
     console.log(
       `  ${chalk.yellow(`${method}`)} -> ${chalk.cyan(`${path}`)}`
     );
@@ -36,7 +36,7 @@ module.exports.register = (server, options, next) => {
         console.log(``);
         console.log(`${chalk.yellow(`hapi-devine-routes`)}: registered routes in ${chalk.cyan(`${base}/${file}`)}:`);
         if (log) console.log(``);
-        routes.forEach(r => log(r));
+        routes.forEach(r => logRoute(r));
 
       }
 
