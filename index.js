@@ -34,7 +34,7 @@ module.exports.register = (server, options, next) => {
         const file = path.relative(routesDir, f);
 
         console.log(` `);
-        console.log(`${chalk.yellow(`routes`)}: registered following routes in ${chalk.cyan(`${base}/${file}`)}:`);
+        console.log(`${chalk.yellow(`hapi-devine-routes`)}: registered routes in ${chalk.cyan(`${base}/${file}`)}:`);
         routes.forEach(r => log(r));
 
       }
