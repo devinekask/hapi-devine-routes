@@ -1,6 +1,6 @@
 const path = require(`path`);
 const glob = require(`glob`);
-
+const fs = require(`fs`);
 const chalk = require(`chalk`);
 
 module.exports.register = (server, options, next) => {
@@ -10,6 +10,8 @@ module.exports.register = (server, options, next) => {
   if (!p) {
     throw new Error(`"path" required`);
   }
+
+  if (!fs.existsSync(p)) return;
 
   const logRoute = ({path, method}) => {
     console.log(
