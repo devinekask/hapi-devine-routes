@@ -49,11 +49,11 @@ module.exports.register = (server, options, next) => {
 
       if (log) console.log(``);
 
+      next();
+
     }
 
   );
-
-  next();
 
 };
 
